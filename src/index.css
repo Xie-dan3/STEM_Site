@@ -1,0 +1,216 @@
+:root {
+  --blue: #0b66ff;
+  --red: #d62828;
+  --bg: #050505;
+  --text: #ffffff;
+  --glass: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* --- CUSTOM SCROLLBAR --- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg); 
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--blue), var(--red)); 
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff; 
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  
+  /* --- VOID BACKGROUND --- */
+  background-color: var(--bg);
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(11, 102, 255, 0.15), transparent 40%), 
+    radial-gradient(circle at 85% 30%, rgba(214, 40, 40, 0.15), transparent 40%);
+  background-attachment: fixed; 
+  
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* --- 1. THE 3D CANVAS --- */
+#canvas-container {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1; 
+  pointer-events: auto; 
+}
+
+/* --- 2. THE SCROLL CONTAINER --- */
+#content-scroll {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  pointer-events: none; 
+}
+
+/* --- 3. RE-ENABLE CLICKS FOR CONTENT --- */
+h1, h2, h3, p, .btn, .glass-card, footer, .subtitle, nav, button, input, textarea {
+  pointer-events: auto;
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px; 
+}
+
+h1 {
+  font-size: 5rem;
+  font-weight: 800;
+  line-height: 1;
+  margin: 0;
+  letter-spacing: -2px;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #a0a0a0;
+  margin-top: 1rem;
+  max-width: 600px;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--blue), var(--red));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* --- SECTIONS --- */
+.section {
+  padding: 100px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative; 
+}
+
+.section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  border-left: 5px solid var(--blue);
+  padding-left: 20px;
+}
+
+/* --- GLASS CARDS (UPDATED FOR BETTER VISIBILITY) --- */
+.glass-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  pointer-events: none; 
+}
+
+.glass-card {
+  /* THE FIX: Darker background + Stronger Blur + Shadow */
+  background: rgba(15, 20, 35, 0.65); /* 65% opaque dark blue/black */
+  backdrop-filter: blur(16px);        /* Blurs the beams behind it */
+  -webkit-backdrop-filter: blur(16px);
+  
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Slightly brighter border */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);   /* Shadow to lift it off the void */
+  
+  padding: 30px;
+  border-radius: 16px;
+  transition: transform 0.3s, border-color 0.3s, background 0.3s;
+  pointer-events: auto; 
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--blue);
+  background: rgba(20, 30, 50, 0.85); /* Even clearer on hover */
+  box-shadow: 0 0 20px rgba(11, 102, 255, 0.2); /* Blue glow on hover */
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--blue);
+}
+
+/* --- BUTTONS --- */
+.cta-container { 
+  margin-top: 2rem; 
+  pointer-events: auto; 
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1rem;
+  margin: 0 10px;
+  display: inline-block;
+  cursor: pointer;
+  border: none; 
+  transition: transform 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.btn-primary { background: var(--blue); color: white; }
+.btn-secondary { border: 2px solid var(--red); color: white; background: transparent; }
+
+/* =========================================
+   MOBILE RESPONSIVENESS RULES
+   ========================================= */
+
+@media (max-width: 768px) {
+  h1 { font-size: 3rem; } 
+  .subtitle { font-size: 1.1rem; }
+  .section { padding: 60px 20px; }
+  
+  .desktop-menu { display: none !important; }
+  .mobile-menu-btn { display: block !important; }
+  
+  .cta-container { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%;
+    margin-top: 2rem; 
+  }
+  
+  .btn { 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
+    max-width: 320px; 
+    margin: 8px 0; 
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-menu-btn { display: none !important; }
+}
