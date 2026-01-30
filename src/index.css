@@ -9,6 +9,11 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden; /* Fix horizontal scroll */
+}
+
+*, *::before, *::after {
+  box-sizing: border-box; /* Fix width calculations */
 }
 
 /* --- CUSTOM SCROLLBAR --- */
@@ -43,7 +48,7 @@ body {
   
   font-family: 'Inter', sans-serif;
   color: var(--text);
-  overflow-x: hidden;
+  overflow-x: hidden; /* Fix horizontal scroll */
 }
 
 /* --- 1. THE 3D CANVAS --- */
@@ -51,7 +56,7 @@ body {
   position: fixed; 
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%; /* Changed from 100vw to prevent scrollbar issues */
   height: 100vh;
   z-index: 1; 
   pointer-events: auto; 
@@ -66,13 +71,14 @@ body {
 }
 
 /* --- 3. RE-ENABLE CLICKS FOR CONTENT --- */
-h1, h2, h3, p, .btn, .glass-card, footer, .subtitle, nav, button, input, textarea {
+/* Added .mobile-menu-item to this list so phone menu works */
+h1, h2, h3, p, .btn, .glass-card, footer, .subtitle, nav, button, input, textarea, .mobile-menu-item, span, a {
   pointer-events: auto;
 }
 
 /* --- HERO SECTION --- */
 .hero-section {
-  height: 100vh;
+  min-height: 100vh; /* Changed height to min-height */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -118,34 +124,32 @@ h1 {
   padding-left: 20px;
 }
 
-/* --- GLASS CARDS (UPDATED FOR BETTER VISIBILITY) --- */
+/* --- GLASS CARDS --- */
 .glass-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Increased min-width slightly */
   gap: 20px;
   pointer-events: none; 
 }
 
 .glass-card {
-  /* THE FIX: Darker background + Stronger Blur + Shadow */
-  background: rgba(15, 20, 35, 0.65); /* 65% opaque dark blue/black */
-  backdrop-filter: blur(16px);        /* Blurs the beams behind it */
+  background: rgba(15, 20, 35, 0.65); 
+  backdrop-filter: blur(16px);        
   -webkit-backdrop-filter: blur(16px);
-  
-  border: 1px solid rgba(255, 255, 255, 0.15); /* Slightly brighter border */
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);   /* Shadow to lift it off the void */
-  
+  border: 1px solid rgba(255, 255, 255, 0.15); 
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);   
   padding: 30px;
   border-radius: 16px;
   transition: transform 0.3s, border-color 0.3s, background 0.3s;
   pointer-events: auto; 
+  overflow: hidden; /* Prevents content from spilling out */
 }
 
 .glass-card:hover {
   transform: translateY(-5px);
   border-color: var(--blue);
-  background: rgba(20, 30, 50, 0.85); /* Even clearer on hover */
-  box-shadow: 0 0 20px rgba(11, 102, 255, 0.2); /* Blue glow on hover */
+  background: rgba(20, 30, 50, 0.85);
+  box-shadow: 0 0 20px rgba(11, 102, 255, 0.2); 
 }
 
 .card-title {
@@ -153,6 +157,13 @@ h1 {
   font-weight: 700;
   margin-bottom: 10px;
   color: var(--blue);
+}
+
+/* --- CONTACT FORM --- */
+.contact-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
 /* --- BUTTONS --- */
@@ -208,6 +219,17 @@ h1 {
     width: 100%; 
     max-width: 320px; 
     margin: 8px 0; 
+  }
+
+  /* FIX: Stack contact form inputs on phone */
+  .contact-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* FIX: Adjust glass grid for small phones */
+  .glass-grid {
+    grid-template-columns: 1fr;
   }
 }
 

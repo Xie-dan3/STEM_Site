@@ -50,7 +50,6 @@ const curriculum = [
   { id: 8, level: "Final", title: "Innovation", desc: "Design and plan a unique invention challenge.", color: "gold", time: "150 min" },
 ];
 
-// --- ANIMATION SETTINGS ---
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -59,9 +58,10 @@ const pageVariants = {
 
 // --- PAGE COMPONENTS ---
 
-// 1. HOME PAGE CONTENT
+// 1. HOME PAGE
 function HomePage({ setPage, onSelectProject }) {
   const [result, setResult] = useState(""); 
+  
   const onSubmit = async (event) => {
     event.preventDefault();
     setResult("Sending...");
@@ -91,7 +91,7 @@ function HomePage({ setPage, onSelectProject }) {
         </div>
       </section>
 
-      {/* ABOUT AEG SECTION (With Auto-Play Videos) */}
+      {/* ABOUT AEG SECTION */}
       <section id="company" className="section">
         <div className="glass-card" style={{ textAlign: 'left', padding: '40px', borderLeft: '5px solid #d62828' }}>
           <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', border: 'none', padding: 0 }}>
@@ -106,24 +106,9 @@ function HomePage({ setPage, onSelectProject }) {
             <strong> logic, creativity, and teamwork</strong>.
           </p>
 
-          {/* Auto-Playing Videos Container */}
           <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <video 
-              src="/asset/robot-arm.mp4" 
-              autoPlay 
-              loop 
-              muted 
-              playsInline 
-              style={{ flex: '1 1 300px', width: '100%', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.2)', height: '200px', objectFit: 'cover' }} 
-            />
-            <video 
-              src="/asset/video-project1.mp4" 
-              autoPlay 
-              loop 
-              muted 
-              playsInline 
-              style={{ flex: '1 1 300px', width: '100%', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.2)', height: '200px', objectFit: 'cover' }} 
-            />
+            <video src="/asset/robot-arm.mp4" autoPlay loop muted playsInline style={{ flex: '1 1 300px', width: '100%', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.2)', height: '200px', objectFit: 'cover' }} />
+            <video src="/asset/video-project1.mp4" autoPlay loop muted playsInline style={{ flex: '1 1 300px', width: '100%', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.2)', height: '200px', objectFit: 'cover' }} />
           </div>
         </div>
       </section>
@@ -139,7 +124,7 @@ function HomePage({ setPage, onSelectProject }) {
         </div>
       </section>
 
-      {/* WHY CHOOSE US */}
+      {/* WHY CHOOSE US (RESTORED) */}
       <section className="section">
         <h2 style={{ textAlign: 'center', border: 'none', fontSize: '2rem', marginBottom: '40px' }}>Why Choose AEG?</h2>
         <div className="glass-grid">
@@ -171,7 +156,6 @@ function HomePage({ setPage, onSelectProject }) {
 
         {/* TOP ROW: 3 CARDS */}
         <div className="glass-grid">
-           {/* 1. Hardware Specs */}
            <div className="glass-card" style={{ textAlign: 'center' }}>
               <img src="/asset/MicrobitBgRemove.png" alt="Microbit Hardware" style={{ height: '120px', marginBottom: '15px', objectFit: 'contain' }} />
               <h3>Hardware Power</h3>
@@ -183,7 +167,6 @@ function HomePage({ setPage, onSelectProject }) {
               </ul>
            </div>
 
-           {/* 2. Real World Applications */}
            <div className="glass-card" style={{ textAlign: 'center' }}>
               <img src="/asset/RoboticMicro.png" alt="Real Projects" style={{ height: '120px', marginBottom: '15px', objectFit: 'contain' }} />
               <h3>Real Projects</h3>
@@ -195,7 +178,6 @@ function HomePage({ setPage, onSelectProject }) {
               </ul>
            </div>
            
-           {/* 3. Programming */}
            <div className="glass-card" style={{ textAlign: 'center' }}>
               <img src="/asset/MakeCode.png" alt="MakeCode Editor" style={{ height: '120px', marginBottom: '15px', objectFit: 'contain' }} />
               <h3>From Blocks to Text</h3>
@@ -210,7 +192,6 @@ function HomePage({ setPage, onSelectProject }) {
 
         {/* BOTTOM ROW: 2 WIDE CARDS */}
         <div className="glass-grid" style={{ marginTop: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))' }}>
-           {/* 4. Game Development */}
            <div className="glass-card" style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '3rem', marginBottom: '15px' }}>🎮</div>
               <h3>Game Development</h3>
@@ -219,7 +200,6 @@ function HomePage({ setPage, onSelectProject }) {
               </p>
            </div>
 
-           {/* 5. Science Experiments */}
            <div className="glass-card" style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '3rem', marginBottom: '15px' }}>🔬</div>
               <h3>Science Experiments</h3>
@@ -229,7 +209,6 @@ function HomePage({ setPage, onSelectProject }) {
            </div>
         </div>
 
-        {/* NEW: Purple Gradient Button */}
         <div style={{ marginTop: '40px', textAlign: 'center' }}>
           <button 
             onClick={() => setPage('microbit')} 
@@ -272,20 +251,18 @@ function HomePage({ setPage, onSelectProject }) {
         <h2>Book a Workshop</h2>
         <div className="glass-card" style={{ maxWidth: '600px', margin: '0 auto' }}>
            <p style={{ textAlign: 'center', marginBottom: '20px', color: '#aaa' }}>
-             Ready to bring STEM to your school? Fill out the form below.
+             Ready to bring STEM to your school? Fill out the form below or WhatsApp us at <strong>012-512 3026</strong>.
            </p>
            <form onSubmit={onSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-             {/* Row 1: Name & Phone */}
-             <div style={{ display: 'flex', gap: '15px' }}>
+             {/* UPDATED: Uses 'contact-row' class for stacking on mobile */}
+             <div className="contact-row">
                <input type="text" name="name" placeholder="Your Name" required style={{ flex: 1, padding: '15px', borderRadius: '8px', border: 'none', background: 'rgba(255,255,255,0.1)', color: 'white' }} />
                <input type="tel" name="phone" placeholder="Phone / WhatsApp" required style={{ flex: 1, padding: '15px', borderRadius: '8px', border: 'none', background: 'rgba(255,255,255,0.1)', color: 'white' }} />
              </div>
-             {/* Row 2: Email & Organization */}
-             <div style={{ display: 'flex', gap: '15px' }}>
+             <div className="contact-row">
                 <input type="email" name="email" placeholder="Email Address" required style={{ flex: 1, padding: '15px', borderRadius: '8px', border: 'none', background: 'rgba(255,255,255,0.1)', color: 'white' }} />
                 <input type="text" name="school" placeholder="School / Org Name" style={{ flex: 1, padding: '15px', borderRadius: '8px', border: 'none', background: 'rgba(255,255,255,0.1)', color: 'white' }} />
              </div>
-             {/* Row 3: Message */}
              <textarea name="message" rows="4" placeholder="Preferred Dates, number of students, or any specific questions..." required style={{ padding: '15px', borderRadius: '8px', border: 'none', background: 'rgba(255,255,255,0.1)', color: 'white' }}></textarea>
              <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '10px' }}>Send Enquiry</button>
              {result && <div style={{ marginTop: '10px', textAlign: 'center', color: result.includes('Success') ? '#4caf50' : '#f44336' }}>{result}</div>}
@@ -296,7 +273,7 @@ function HomePage({ setPage, onSelectProject }) {
   );
 }
 
-// 2. CURRICULUM PAGE CONTENT
+// 2. CURRICULUM PAGE
 function CurriculumPage({ setPage }) {
   useEffect(() => { window.scrollTo(0,0); }, []);
 
@@ -314,7 +291,6 @@ function CurriculumPage({ setPage }) {
       <h1 style={{ fontSize: '3rem', marginBottom: '10px' }}>The <span className="gradient-text">Roadmap</span></h1>
       <p className="subtitle" style={{ marginBottom: '50px' }}>Our step-by-step curriculum takes students from absolute beginners to confident inventors.</p>
       
-      {/* ROADMAP GRID */}
       <div className="glass-grid">
         {curriculum.map((lesson) => (
           <div key={lesson.id} className="glass-card" style={{ position: 'relative', paddingLeft: '20px' }}>
@@ -327,31 +303,26 @@ function CurriculumPage({ setPage }) {
         ))}
       </div>
 
-      {/* TEACHING METHOD */}
       <div style={{ marginTop: '80px', marginBottom: '80px' }}>
         <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '40px' }}>
           Our Teaching <span className="gradient-text">Process</span>
         </h2>
         <div className="glass-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
-           {/* Step 1 */}
            <div className="glass-card" style={{ textAlign: 'center', borderTop: '4px solid #0b66ff' }}>
               <div style={{ fontSize: '2rem', marginBottom: '10px' }}>🎯</div>
               <h3>1. Theme</h3>
               <p style={{ fontSize: '0.9rem', color: '#aaa' }}>Select engaging topics like Robots or Smart Homes.</p>
            </div>
-           {/* Step 2 */}
            <div className="glass-card" style={{ textAlign: 'center', borderTop: '4px solid #d62828' }}>
               <div style={{ fontSize: '2rem', marginBottom: '10px' }}>✏️</div>
               <h3>2. Design</h3>
               <p style={{ fontSize: '0.9rem', color: '#aaa' }}>Break down complex problems into manageable steps.</p>
            </div>
-           {/* Step 3 */}
            <div className="glass-card" style={{ textAlign: 'center', borderTop: '4px solid #0b66ff' }}>
               <div style={{ fontSize: '2rem', marginBottom: '10px' }}>💻</div>
               <h3>3. Code</h3>
               <p style={{ fontSize: '0.9rem', color: '#aaa' }}>Write logic, test, and debug in real-time.</p>
            </div>
-           {/* Step 4 */}
            <div className="glass-card" style={{ textAlign: 'center', borderTop: '4px solid #d62828' }}>
               <div style={{ fontSize: '2rem', marginBottom: '10px' }}>🏆</div>
               <h3>4. Showcase</h3>
@@ -368,7 +339,7 @@ function CurriculumPage({ setPage }) {
   );
 }
 
-// 3. ACTIVITIES PAGE CONTENT
+// 3. ACTIVITIES PAGE
 function ActivitiesPage({ setPage }) {
   useEffect(() => { window.scrollTo(0,0); }, []);
   
@@ -391,16 +362,8 @@ function ActivitiesPage({ setPage }) {
         Capturing the excitement of STEM discovery in schools across Johor.
       </p>
 
-      {/* Featured Moment Video (Smaller Size - 500px) */}
       <div style={{ maxWidth: '500px', margin: '0 auto 50px auto', padding: '20px', background: 'rgba(255,255,255,0.05)', borderRadius: '15px', border: '1px solid rgba(255,255,255,0.1)' }}>
-         <video 
-           src="/asset/VideoMoment.mp4" 
-           autoPlay 
-           loop 
-           muted 
-           playsInline 
-           style={{ width: '100%', borderRadius: '10px', display: 'block' }} 
-         />
+         <video src="/asset/VideoMoment.mp4" autoPlay loop muted playsInline style={{ width: '100%', borderRadius: '10px', display: 'block' }} />
       </div>
       
       <div className="glass-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
@@ -424,7 +387,7 @@ function ActivitiesPage({ setPage }) {
   );
 }
 
-// 4. MICROBIT PAGE CONTENT
+// 4. MICROBIT PAGE
 function MicrobitPage({ setPage }) {
   useEffect(() => { window.scrollTo(0,0); }, []);
 
@@ -441,7 +404,6 @@ function MicrobitPage({ setPage }) {
       <button onClick={() => setPage('home')} style={{ background: 'none', border: 'none', color: '#aaa', cursor: 'pointer', marginBottom: '20px', fontSize: '1rem' }}>← Back to Home</button>
       <h1 style={{ fontSize: '3rem', marginBottom: '40px', textAlign: 'center' }}>The Power of <span style={{ color: '#0b66ff' }}>Micro:bit</span></h1>
 
-      {/* 1. ABOUT MICROBIT */}
       <section className="section" style={{ padding: '0' }}>
         <div className="glass-card" style={{ textAlign: 'center' }}>
            <img src="/asset/MicrobitBgRemove.png" alt="Microbit" style={{ height: '180px', marginBottom: '20px' }} />
@@ -453,7 +415,6 @@ function MicrobitPage({ setPage }) {
         </div>
       </section>
 
-      {/* 2. SPECIFICATIONS */}
       <section className="section">
         <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>Technical <span className="gradient-text">Specs</span></h2>
         <div className="glass-card" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '40px' }}>
@@ -468,7 +429,6 @@ function MicrobitPage({ setPage }) {
         </div>
       </section>
 
-      {/* 3. DIAGRAM CONNECTION */}
       <section className="section">
         <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>Pin <span className="gradient-text">Diagram</span></h2>
         <div className="glass-card" style={{ padding: '10px', textAlign: 'center' }}>
@@ -476,31 +436,25 @@ function MicrobitPage({ setPage }) {
         </div>
       </section>
 
-      {/* 4. EXAMPLES & APPLICATION VIDEOS */}
       <section className="section">
         <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>Real World <span className="gradient-text">Applications</span></h2>
         <div className="glass-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
-           
            <div className="glass-card" style={{ padding: '10px' }}>
              <video src="/asset/microbitdizplay.mp4" autoPlay loop muted playsInline style={{ width: '100%', borderRadius: '10px' }} />
              <h3 style={{ textAlign: 'center', marginTop: '10px', fontSize: '1.2rem' }}>LED Display</h3>
            </div>
-
            <div className="glass-card" style={{ padding: '10px' }}>
              <video src="/asset/sensor-bin.mp4" autoPlay loop muted playsInline style={{ width: '100%', borderRadius: '10px' }} />
              <h3 style={{ textAlign: 'center', marginTop: '10px', fontSize: '1.2rem' }}>Smart Sensor Bin</h3>
            </div>
-
            <div className="glass-card" style={{ padding: '10px' }}>
              <video src="/asset/microbitrobot.mp4" autoPlay loop muted playsInline style={{ width: '100%', borderRadius: '10px' }} />
              <h3 style={{ textAlign: 'center', marginTop: '10px', fontSize: '1.2rem' }}>Robot Control</h3>
            </div>
-
            <div className="glass-card" style={{ padding: '10px' }}>
              <video src="/asset/MicrobitZenzor.mp4" autoPlay loop muted playsInline style={{ width: '100%', borderRadius: '10px' }} />
              <h3 style={{ textAlign: 'center', marginTop: '10px', fontSize: '1.2rem' }}>Sensor Data Log</h3>
            </div>
-
         </div>
       </section>
 
@@ -528,7 +482,7 @@ export default function App() {
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 100);
+      }, 300);
     }
   };
 
@@ -565,7 +519,7 @@ export default function App() {
             <span onClick={() => handleNav('curriculum')} style={{ color: 'white', cursor: 'pointer' }}>Curriculum</span>
             <span onClick={() => handleNav('activities')} style={{ color: 'white', cursor: 'pointer' }}>Activities</span>
             <span onClick={() => handleNav('microbit')} style={{ color: 'white', cursor: 'pointer' }}>Microbit</span>
-            <span onClick={() => handleNav('home', 'contact')} style={{ color: '#d62828', textDecoration: 'none', cursor: 'pointer' }}>Contact</span>
+            <a href="#contact" onClick={() => handleNav('home', 'contact')} style={{ color: '#d62828', textDecoration: 'none' }}>Contact</a>
           </div>
 
           <div className="mobile-menu-btn" style={{ fontSize: '1.5rem', cursor: 'pointer' }} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -574,16 +528,19 @@ export default function App() {
         </nav>
 
         {mobileMenuOpen && (
-          <div style={{
-            position: 'fixed', top: '75px', left: 0, width: '100%', height: '100vh',
-            background: 'rgba(0,0,0,0.95)', zIndex: 99, display: 'flex', flexDirection: 'column',
-            alignItems: 'center', paddingTop: '50px', gap: '30px', fontSize: '1.5rem', fontWeight: 'bold'
-          }}>
-            <span onClick={() => handleNav('home')} style={{ color: 'white' }}>Home</span>
-            <span onClick={() => handleNav('curriculum')} style={{ color: 'white' }}>Curriculum</span>
-            <span onClick={() => handleNav('activities')} style={{ color: 'white' }}>Activities</span>
-            <span onClick={() => handleNav('microbit')} style={{ color: 'white' }}>Microbit</span>
-            <span onClick={() => handleNav('home', 'contact')} style={{ color: '#d62828', textDecoration: 'none' }}>Contact</span>
+          <div 
+            style={{
+              position: 'fixed', top: '75px', left: 0, width: '100%', height: '100vh',
+              background: 'rgba(0,0,0,0.95)', zIndex: 99, display: 'flex', flexDirection: 'column',
+              alignItems: 'center', paddingTop: '50px', gap: '30px', fontSize: '1.5rem', fontWeight: 'bold',
+              pointerEvents: 'auto' /* IMPORTANT FIX for mobile clicks */
+            }}
+          >
+            <span className="mobile-menu-item" onClick={() => handleNav('home')} style={{ color: 'white' }}>Home</span>
+            <span className="mobile-menu-item" onClick={() => handleNav('curriculum')} style={{ color: 'white' }}>Curriculum</span>
+            <span className="mobile-menu-item" onClick={() => handleNav('activities')} style={{ color: 'white' }}>Activities</span>
+            <span className="mobile-menu-item" onClick={() => handleNav('microbit')} style={{ color: 'white' }}>Microbit</span>
+            <a className="mobile-menu-item" href="#contact" onClick={() => handleNav('home', 'contact')} style={{ color: '#d62828', textDecoration: 'none' }}>Contact</a>
           </div>
         )}
 
@@ -594,7 +551,6 @@ export default function App() {
           {currentPage === 'microbit' && <MicrobitPage key="microbit" setPage={handleNav} />}
         </AnimatePresence>
 
-        {/* --- FOOTER (END RIBBON) --- */}
         <footer style={{ 
           marginTop: '80px',
           padding: '40px 20px', 
